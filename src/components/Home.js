@@ -3,12 +3,14 @@ import { Col, Container, Row } from "react-bootstrap";
 import City from "./City";
 import SearchArea from './SearchArea';
 import WeatherStore from "../stores/WeatherStore";
-import Actions from "../actions/Actions"
 import WeatherAPI from "../utils/WeatherAPI";
+import Actions from "../actions/Actions"
+import ApiError from "./ApiError";
 
 function getState() {
   return {
     citySwap: WeatherStore.getCitySwap(),
+    apiError: WeatherStore.getApiError()
   };
 }
 
@@ -36,9 +38,13 @@ class Home extends React.Component {
       return (
       <Container fluid="md">
         <Row className="justify-content-md-center">
+          {this.state.apiError ? 
+          <ApiError/>
+          :
           <Col sm={12}>
           {this.state.citySwap ? <City/> : <SearchArea/>}  
           </Col>
+          }
         </Row>
       </Container>
       );

@@ -13,27 +13,43 @@ var responseData =[];
 var dataForDays = [];
 var history = [];
 var citySwap = false;
+var apiError = false
 
 function resetStore() {
   responseData = "";
   var citySwap = false;
   var responseData =[];
   var dataForDays = [];
+  var apiError = false
+}
+
+function setApiError(){
+   apiError = true;
 }
 
 function setResponseData(data){
-  responseData = data
+  responseData = data;
+  apiError = false;
 }
 
 function setDataForDays(data) {
-    dataForDays = data
+  apiError = false;
+  dataForDays = data;
 }
+
 function swapCity() {
-    citySwap = !citySwap
+  citySwap = !citySwap
 }
+
 function goToCity() {
   citySwap = true
 }
+
+function goToHome() {
+  citySwap = false
+  apiError = false
+}
+
 function addToHistory(data) {
     if(history.length <= 8){
       history.unshift({city: data.city,date: data.date})
@@ -63,6 +79,9 @@ function addToHistory(data) {
     getSmallHistory(){
       let smallHistory = history.slice(0, 3);;
       return smallHistory
+    }
+    ,getApiError(){
+      return apiError
     },
     /**
      * Emit Change event
@@ -104,8 +123,14 @@ AppDispatcher.register(function(payload)  {
       case AppConstants.GO_TO_CITY:
         goToCity(action.data)
         break;
+      case AppConstants.GO_TO_HOME:
+        goToHome(action.data)
+        break;
       case AppConstants.RESET_STORE:
         resetStore(action.data)
+        break;
+      case AppConstants.SET_API_ERROR:
+        setApiError(action.data)
         break;
       default:
           return true;

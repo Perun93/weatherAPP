@@ -16,7 +16,6 @@ class SearchArea extends React.Component {
         if (event.key === 'Enter') {
               WeatherAPI.getDataByCity(this.state.searchValue);
               WeatherAPI.getDataForDays(this.state.searchValue);
-              WeatherAPI.saveToHistory(this.state.searchValue);
               WeatherAPI.swapCity();
         }
       }

@@ -1,7 +1,8 @@
 import Actions from '../actions/Actions'
+import APIKey from '../text';
 
-var APIKey = "11cd1a131b9020bb8cf8838e9e045d22";
 var units = "metric";
+
 
 function parseApiData(data) {
     var responseMetadata =[];
@@ -34,7 +35,6 @@ function parseDataByDays(data) {
 
  var startDate = new Date();
     var aryDates = GetDates(startDate, 6);
-    console.log(aryDates)
     function GetDates(startDate, daysToAdd) {
         var aryDates = [];
     
@@ -73,8 +73,14 @@ var WeatherAPI = {
         .then(res => res.json())
         .then(
         (result) => {
-            resultData = parseApiData(result) 
-            Actions.setResponseData(resultData)
+            if(result.cod === 200){
+                this.saveToHistory(city)
+                resultData = parseApiData(result) 
+                Actions.setResponseData(resultData)
+            }
+            else{
+                Actions.setApiError();
+            }
         })
     }
     },
@@ -82,12 +88,17 @@ var WeatherAPI = {
     getDataForDays(city){
         let resultData;
         if(city !== undefined){
-            fetch('https:/api.openweathermap.org/data/2.5/forecast/daily?q='+city+'&cnt=7&units=metric&appid=11cd1a131b9020bb8cf8838e9e045d22')               
+            fetch('https:/api.openweathermap.org/data/2.5/forecast/daily?q='+city+'&cnt=7&units=metric&appid='+APIKey+'')               
             .then(res => res.json())
             .then(
             (result) => {
-                resultData = parseDataByDays(result)
-                Actions.setDataForDays(resultData)
+                if(result.cod === "200"){
+                    resultData = parseDataByDays(result)
+                    Actions.setDataForDays(resultData)
+                }
+                else{
+                    Actions.setApiError();
+                }
             })
         }
     },
@@ -104,7 +115,9 @@ var WeatherAPI = {
     swapCity(){
         Actions.swapCity();
     },
-
+    goToHome(){
+        Actions.goToHome();
+    },
     goToCity(){
         Actions.goToCity();
     }

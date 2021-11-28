@@ -39,9 +39,21 @@ var AppActions = {
         data : data
       });
     },
+    goToHome :function(data){
+      AppDispatcher.handleAction({
+        actionType: AppConstants.GO_TO_HOME,
+        data : data
+      });
+    },
     resetStore :function(data){
       AppDispatcher.handleAction({
         actionType: AppConstants.RESET_STORE,
+        data : data
+      });
+    },
+    setApiError :function(data){
+      AppDispatcher.handleAction({
+        actionType: AppConstants.SET_API_ERROR,
         data : data
       });
     },

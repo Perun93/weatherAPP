@@ -16,8 +16,6 @@ You will also see any lint errors in the console.
 
 ### Configuration of the APP
 
-APP is build to work outside of the box if you want to change some of the configurations you can find them in the top of WeatherApi
-
-Var APPkey is set to curent key if for some reasone it dont work use:
-var APIKey = "11cd1a131b9020bb8cf8838e9e045d22";
-Units are set to metrics but can be changed to:  standard, metric and imperial
+APP is build to work outside of the box but not to expose API KEY on github i removed it from code and can be found on my Drive:
+https://drive.google.com/file/d/1XOxpPGIFU1kSFTu_1fUDEpQ7eZZrtrdv/view?usp=sharing
+Unpack the zip file and copy text.js to /src of the project

@@ -13,5 +13,7 @@ module.exports = keyMirror({
   ADD_TO_HISTORY: "addToHistory",
   SWAP_CITY: "swapCity",
   GO_TO_CITY: "goToCity",
-  RESET_STORE: "resetStore"
+  GO_TO_HOME: "goToHome",
+  RESET_STORE: "resetStore",
+  SET_API_ERROR: "setApiError"
 });
